@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CLOTHEN | My account{% endblock %}
+
+{% block content %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ user }}! </h1>
+
+    <p class="lead">Control here your datas.</p>
+    <hr>
+    <a href="{{ path('account_password') }}">Update my password</a><br>
+    <a href="">Add postal addresses</a><br>
+    <a href="">My commands</a><br>
+
+    <div class="card-deck">
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Update my password</h5>
+                <div class="iconz">
+                    <i class="fas fa-house-user"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Manage my delivery addresses</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">My orders</h5>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+
+</div>
+{% endblock %}
