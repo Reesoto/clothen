@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\SearchType;
+use App\Service\ProductService;
 use App\Tools\Search;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,13 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     private $em;
+    private $productService;
 
     /**
      * @param $em
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, ProductService $productService)
     {
         $this->em = $em;
+        $this->productService = $productService;
     }
 
 
@@ -37,9 +40,9 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $products = $this->em->getRepository(Product::class)->findWithSearch($search);
+            $products = $this->productService->findWithFilters($search);
         } else {
-            $products = $this->em->getRepository(Product::class)->findAll();
+            $products = $this->productService->findAll();
         }
 
         return $this->render('product/index.html.twig',[

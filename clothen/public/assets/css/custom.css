@@ -9,6 +9,10 @@ body {
     width: 50px;
 }
 
+.cart-icon {
+    height:20px;
+}
+
 .brandName {
     font-family: "Kaushan Script";
 }
