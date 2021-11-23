@@ -13,30 +13,29 @@
 
     <p class="lead">Control here your datas.</p>
     <hr>
-    <a href="{{ path('account_password') }}">Update my password</a><br>
-    <a href="">Add postal addresses</a><br>
-    <a href="">My commands</a><br>
-
     <div class="card-deck">
-        <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Update my password</h5>
-                <div class="iconz">
-                    <i class="fas fa-house-user"></i>
-                </div>
+        <div class="card smooth-hover">
+            <a href="{{ path('account_password') }}">
+                <img class="card-img-top" src="{{ asset('assets/img/padlock.png') }}" alt="Update my password">
+            </a>
+            <div class="card-body text-center">
+                <span class="card-title">Update my password</span>
             </div>
         </div>
-        <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Manage my delivery addresses</h5>
+        <div class="card smooth-hover">
+            <a href="{{ path('account_address') }}">
+                <img class="card-img-top" src="{{ asset('assets/img/address.png') }}" alt="Manage my addresses">
+            </a>
+            <div class="card-body text-center">
+                <span class="card-title">Manage my delivery addresses</span>
             </div>
         </div>
-        <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">My orders</h5>
+        <div class="card smooth-hover">
+            <a href="{{ path('account_password') }}">
+                <img class="card-img-top" src="{{ asset('assets/img/shopping-bag.png') }}" alt="My orders">
+            </a>
+            <div class="card-body text-center">
+                <span class="card-title">My orders</span>
             </div>
         </div>
     </div>
