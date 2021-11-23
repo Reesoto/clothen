@@ -4,11 +4,6 @@ body {
     position: relative;
 }
 
-.iconz {
-    height : 50px;
-    width: 50px;
-}
-
 .cart-icon {
     height:20px;
 }
@@ -50,4 +45,20 @@ body {
 }
 .card.smooth-hover:hover {
     background-color: #dfeaff;
+}
+
+.form-check {
+    background-color : #f4f8ff;
+    padding: 20px 65px;
+    margin-top: 7px;
+}
+
+.col-form-label {
+    font-weight: bold;
+}
+
+.order-summary {
+    background-color : #f4f8ff;
+    padding: 20px;
+    margin-top: 22px;
 }

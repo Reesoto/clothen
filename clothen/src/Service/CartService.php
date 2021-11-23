@@ -77,10 +77,10 @@ class CartService
     }
 
     /**
-     * @param array $cart
+     * @param $cart
      * @return array
      */
-    public function getDetailsFromCart(array $cart) {
+    public function getDetailsFromCart($cart) {
         $cartContent = [];
 
         if(!empty($this->get())) {

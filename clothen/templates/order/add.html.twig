@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clothen | Order payment{% endblock %}
+
+{% block content %}
+    <h2>My order summary</h2>
+    <a href="{{ path('account') }}">Back to your account</a>
+    <p>Select your preferences</p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <strong>Delivery address :</strong><br/>
+            <div class="form-check mt-4">
+                {{ delivery_address|raw }}
+            </div>
+            <hr>
+            <strong>Carrier :</strong><br/>
+            <div class="form-check">
+                {{ carrier.name }}<br/>
+                {{ carrier.description }}<br/>
+                {{ carrier.price|number_format(2) }}€
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="text-center">
+                <b>Your order</b>
+            </div>
+
+            <div class="order-summary">
+                {% set total = null %}
+                {% for key,item in cart %}
+                    <div class="row {% if key > 0 %}mt-2{% endif %}">
+                        <div class="col-2"><img src="/uploads/{{ item.product.picture }}" alt="{{ item.product.name }}" height="75px"></div>
+                        <div class="col-5 my-auto text-center">{{ item.product.name }}</div>
+                        <div class="col-2 my-auto">x {{ item.quantity }}</div>
+                        <div class="col-3 my-auto">{{ (item.product.price/100)|number_format(2) }} €</div>
+                    </div>
+                    {% set total = total + (item.quantity)*(item.product.price) %}
+                {% endfor %}
+            </div>
+            <hr>
+            <strong>Subtotal :</strong> {{ (total / 100)|number_format(2) }}€<br>
+            <strong>Shipment fees :</strong> {{ carrier.price|number_format(2) }}€
+            <hr>
+            <strong>Total :</strong> {{ ((total / 100) + carrier.price)|number_format(2) }}€
+            <a href="" class="btn btn-success btn-block m-3">Finalize your order ({{ ((total / 100) + carrier.price)|number_format(2) }}€)</a>
+        </div>
+    </div>
+{% endblock %}

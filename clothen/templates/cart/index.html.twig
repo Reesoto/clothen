@@ -50,7 +50,7 @@
         <div class="text-right">
             <b>Number of items : {{ cart|length }}</b><br>
             <b>Total amount : {{ (total / 100)|number_format(2) }} €</b>
-            <a href="" class="btn btn-success btn-block mt-2 mb-5">Payment process</a>
+            <a href="{{ path('order') }}" class="btn btn-success btn-block mt-2 mb-5">Payment process</a>
         </div>
     {% else %}
         <hr>

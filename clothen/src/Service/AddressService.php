@@ -78,6 +78,25 @@ class AddressService
 
     /**
      * @param Address $address
+     * @return mixed
+     */
+    public function getFormattedAddress(Address $address) {
+        $company = '';
+        if($address->getCompany()) {
+            $company = $address->getCompany() . '<br/>';
+        }
+        $formattedAddresse = $address->getFirstname() . ' ' . $address->getLastname() . ' (' .
+            $address->getPhone() . ')<br/>' .
+            $company .
+            $address->getAddress() . '</br>' .
+            $address->getZipcode() . ' ' . $address->getCity() . '</br>' .
+            $address->getCountry();
+
+        return $formattedAddresse;
+    }
+
+    /**
+     * @param Address $address
      * @param User $user
      * @return bool
      */
