@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clothen | Orders - Payment success{% endblock %}
+
+{% block content %}
+    <h2>My order</h2>
+    <a href="{{ path('account') }}">Back to your account</a>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Thanks for your purchase n°<b>{{ order.reference }}</b> !</p>
+            <p>You will receive an email at <b>{{ order.user.email }}</b> in few minutes.</p>
+            <hr>
+            <p>Your delivery will be sent by <b>{{ order.carrierName }}</b> at : </p>
+            <p>{{ order.delivery|raw }}</p>
+            <hr>
+            <p>To follow your order, please check your <a href="{{ path('my_orders') }}">orders status</a></p>
+        </div>
+    </div>
+{% endblock %}

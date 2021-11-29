@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clothen | Orders - Payment cancel{% endblock %}
+
+{% block content %}
+    <h2>My order</h2>
+    <a href="{{ path('account') }}">Back to your account</a>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <p>There is an error on your payment process for your order n°<b>{{ order.reference }}</b> !</p>
+            <p>You will receive an email at <b>{{ order.user.email }}</b> in few minutes.</p>
+            <a href="{{ path('order') }}" class="btn btn-success m-3">Retry your payment</a>
+        </div>
+    </div>
+{% endblock %}

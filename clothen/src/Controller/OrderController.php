@@ -2,9 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Address;
-use App\Entity\Order;
-use App\Entity\OrderDetails;
 use App\Form\OrderType;
 use App\Service\AddressService;
 use App\Service\CartService;
@@ -16,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OrderController extends AbstractController
 {
+
     /**
      * @param Request $request
      * @param CartService $cartService
@@ -60,18 +58,47 @@ class OrderController extends AbstractController
         $deliveryAddress = $addressService->getFormattedAddress($delivery);
 
         if($form->isSubmitted() && $form->isValid()) {
+
             $carrier = $form->get('carriers')->getData();
-            $orderService->saveOrder($form, $this->getUser(), $cart);
+            $order = $orderService->saveOrder($form, $this->getUser(), $cart);
 
             return $this->render('order/add.html.twig', [
-                'cart'      => $cartService->getDetailsFromCart($cart),
-                'carrier'   => $carrier,
-                'delivery_address'  => $deliveryAddress
+                'cart'              => $cartService->getDetailsFromCart($cart),
+                'carrier'           => $carrier,
+                'delivery_address'  => $deliveryAddress,
+                'reference'         => $order->getReference()
             ]);
         }
 
         return $this->redirectToRoute('cart');
+    }
 
+    /**
+     * @Route("/order/my-orders", name="my_orders")
+     */
+    public function orders(OrderService $orderService): Response
+    {
 
+        $orders = $orderService->getMyPaidOrders($this->getUser());
+
+        return $this->render('order/orders.html.twig', [
+            'orders'    => $orders
+        ]);
+    }
+
+    /**
+     * @Route("/order/{reference}", name="order_details")
+     */
+    public function detail(OrderService $orderService, $reference): Response
+    {
+        $order = $orderService->getOrderByReference($reference);
+
+        if(!$order || $order->getUser() != $this->getUser()) {
+            return $this->redirectToRoute('my_order');
+        }
+
+        return $this->render('order/order.html.twig', [
+            'order'    => $order
+        ]);
     }
 }

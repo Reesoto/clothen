@@ -56,6 +56,16 @@ class Order
      */
     private $isPaid;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $stripeSessionId;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -170,7 +180,7 @@ class Order
 
     public function getTotal() : ?float
     {
-        $total = null;
+        $total = 0;
         $items = $this->getOrderDetails()->getValues();
 
         foreach($items as $item)
@@ -178,6 +188,30 @@ class Order
             $total = $total + ($item->getPrice() * $item->getQuantity());
         }
 
-        return $total;
+        return $total * 100;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getStripeSessionId(): ?string
+    {
+        return $this->stripeSessionId;
+    }
+
+    public function setStripeSessionId(?string $stripeSessionId): self
+    {
+        $this->stripeSessionId = $stripeSessionId;
+
+        return $this;
     }
 }

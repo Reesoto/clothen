@@ -61,7 +61,7 @@ class CartService
     /**
      * @return mixed
      */
-    public function remove() {
+    public function clear() {
         return $this->session->remove('cart');
     }
 
@@ -85,7 +85,7 @@ class CartService
 
         if(!empty($this->get())) {
             foreach ($cart as $id => $quantity) {
-                $product = $this->productService->getDetails($id);
+                $product = $this->productService->getDetailsById($id);
                 $cartContent[] = [
                     'product' => $product,
                     'quantity' => $quantity

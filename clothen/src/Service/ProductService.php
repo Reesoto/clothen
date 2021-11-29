@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ProductService
 {
+    const YOUR_DOMAIN = 'http://localhost:8741';
     private $em;
 
     /**
@@ -22,8 +23,16 @@ class ProductService
      * @param int $id
      * @return mixed|object|null
      */
-    public function getDetails(int $id) {
+    public function getDetailsById(int $id) {
        return $this->em->getRepository(Product::class)->find($id);
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function getDetailsByName(string $name) {
+       return $this->em->getRepository(Product::class)->findOneByName($name);
     }
 
     /**
@@ -53,6 +62,32 @@ class ProductService
         $products = $this->em->getRepository(Product::class)->findAll();
 
         return $products;
+    }
+
+    /**
+     * @param array $orderDetails
+     * @return array
+     */
+    public function getProductsForStripe(array $orderDetails) {
+        $products_for_stripe = [];
+
+        foreach($orderDetails as $product)
+        {
+            $product_details = $this->getDetailsByName($product->getProduct());
+            $products_for_stripe[] = [
+                'price_data' => [
+                    'currency' => 'eur',
+                    'product_data' => [
+                        'name' => $product->getProduct(),
+                        'images' => [self::YOUR_DOMAIN."/uploads/".$product_details->getPicture()]
+                    ],
+                    'unit_amount' => $product->getPrice()*100,
+                ],
+                'quantity' => $product->getQuantity(),
+            ];
+        }
+
+        return $products_for_stripe;
     }
 
 

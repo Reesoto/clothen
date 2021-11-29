@@ -21,8 +21,6 @@ class ProductCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads';
-
         return [
             TextField::new('name'),
             SlugField::new('slug')->setTargetFieldName('name'),
