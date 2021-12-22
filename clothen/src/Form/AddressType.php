@@ -63,7 +63,11 @@ class AddressType extends AbstractType
                 "label" => "Country",
                 "attr"  =>  [
                     "placeholder"   => "France"
-                ]
+                ],
+                "choices" => [
+                    "France" => "FR"
+                ],
+                "preferred_choices" => ["FR"]
             ])
             ->add('phone', TelType::class, [
                 "label" => "Phone",

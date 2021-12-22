@@ -79,7 +79,7 @@ class ProductService
                     'currency' => 'eur',
                     'product_data' => [
                         'name' => $product->getProduct(),
-                        'images' => [self::YOUR_DOMAIN."/uploads/".$product_details->getPicture()]
+                        'images' => [self::YOUR_DOMAIN . "/uploads/" . $product_details->getPicture()]
                     ],
                     'unit_amount' => $product->getPrice()*100,
                 ],

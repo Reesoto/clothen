@@ -26,8 +26,6 @@ class StripeController extends AbstractController
         $stripe_sk = $this->getParameter('app.stripe_sk');
         Stripe::setApiKey($stripe_sk);
 
-        $products_for_stripe = [];
-
         $orderDetails = $orderService->getOrderDetailsByReference($reference);
 
         // if no reference has been found with this 'reference' value, redirect to 'cart' Route
@@ -40,13 +38,13 @@ class StripeController extends AbstractController
         $stripeProducts = $productService->getProductsForStripe($orderDetails);
         $stripeCarrier = $carrierService->getCarrierDetailsByOrder($order);
 
-        $products_for_stripe[] = [$stripeProducts, $stripeCarrier];
+        array_push($stripeProducts, $stripeCarrier);
 
 
         $checkout_session = Session::create([
             'customer_email' => $this->getUser()->getEmail(),
             'line_items' => [
-                $products_for_stripe
+                $stripeProducts
             ],
             'payment_method_types' => [
                 'card',
