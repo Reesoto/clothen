@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CLOTHEN | My account{% endblock %}
+
+{% block content %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ user }}! </h1>
+
+    <p class="lead">Control here your datas.</p>
+    <hr>
+    <div class="card-deck">
+        <div class="card smooth-hover">
+            <a href="{{ path('account_password') }}">
+                <img class="card-img-top" src="{{ asset('assets/img/padlock.png') }}" alt="Update my password">
+            </a>
+            <div class="card-body text-center">
+                <span class="card-title">Update my password</span>
+            </div>
+        </div>
+        <div class="card smooth-hover">
+            <a href="{{ path('account_address') }}">
+                <img class="card-img-top" src="{{ asset('assets/img/address.png') }}" alt="Manage my addresses">
+            </a>
+            <div class="card-body text-center">
+                <span class="card-title">Manage my delivery addresses</span>
+            </div>
+        </div>
+        <div class="card smooth-hover">
+            <a href="{{ path('my_orders') }}">
+                <img class="card-img-top" src="{{ asset('assets/img/shopping-bag.png') }}" alt="My orders">
+            </a>
+            <div class="card-body text-center">
+                <span class="card-title">My orders</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+
+</div>
+{% endblock %}

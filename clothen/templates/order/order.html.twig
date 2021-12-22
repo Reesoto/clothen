@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clothen | My orders{% endblock %}
+
+{% block content %}
+    <h2>Orders {{ order.reference }}</h2>
+    <a href="{{ path('my_orders') }}">Back to your orders</a>
+    <hr>
+    <strong>Order date : </strong> {{ order.createdAt|date('d/m/Y H:m:s') }} <br/>
+    <strong>Reference :</strong> {{ order.reference }} <br/>
+    <strong>Carrier :</strong> {{ order.carrierName }}
+    <hr>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit price</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in order.orderDetails %}
+            <tr>
+                <td>{{ product.product }}</td>
+                <td>{{ product.quantity }}</td>
+                <td class="text-center">{{ (product.price)|number_format(2) }} €</td>
+                <td>{{ product.total|number_format(2) }} €</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-right">
+            <strong>Subtotal :</strong> {{ (order.getTotal/100)|number_format(2) }} €<br/>
+            <strong>Delivery fees :</strong> {{ (order.carrierPrice/100)|number_format(2) }} €<br/>
+            <strong>Total :</strong> {{ ((order.getTotal + order.carrierPrice)/100)|number_format(2) }} €
+        </div>
+{% endblock %}

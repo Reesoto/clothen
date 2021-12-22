@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CLOTHEN | My addresses{% endblock %}
+
+{% block content %}
+    <a href="{{ path('account_address_add') }}" class="btn btn-primary btn-sm float-right">Add an address</a>
+    <h1>My addresses </h1>
+
+    <p class="lead">Manage here your addresses.</p>
+    <a href="{{ path('account') }}">Back to my account</a>
+    <hr>
+    {% if app.user.addresses|length == 0  %}
+        <p class="text-center">
+            You don't have address set for the moment. Click <a href="{{ path('account_address_add') }}">here</a> to add your first address
+        </p>
+    {% else %}
+        <div class="row m-5">
+            {% for address in app.user.addresses %}
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ address.name }}</h5>
+                            <hr>
+                            <p class="card-text">{{ address.address }}<br>{{ address.zipcode }} {{ address.city }}</p>
+                            <hr>
+                            <div class="text-center">
+                                <a href="{{ path('account_address_edit', {'id': address.id}) }}" class="btn btn-outline-primary">Edit</a>
+                                <a href="{{ path('account_address_delete', {'id': address.id}) }}" class="btn btn-outline-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

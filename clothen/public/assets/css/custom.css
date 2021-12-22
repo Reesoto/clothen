@@ -1,0 +1,64 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+}
+
+.cart-icon {
+    height:20px;
+}
+
+.brandName {
+    font-family: "Kaushan Script";
+}
+
+.navbar-item-custom a{
+    color: #FFF;
+}
+
+.footer-custom {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    background-color: #dfeaff;
+    padding-top: 25px;
+}
+
+.product-item h5{
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.product-item .product-subtitles{
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.product-item .product-price{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card.smooth-hover {
+    transition: 0.3s;
+}
+.card.smooth-hover:hover {
+    background-color: #dfeaff;
+}
+
+.form-check {
+    background-color : #f4f8ff;
+    padding: 20px 65px;
+    margin-top: 7px;
+}
+
+.col-form-label {
+    font-weight: bold;
+}
+
+.order-summary {
+    background-color : #f4f8ff;
+    padding: 20px;
+    margin-top: 22px;
+}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clothen | Orders{% endblock %}
+
+{% block content %}
+    <h2>My order</h2>
+    <a href="{{ path('cart') }}">Back to your cart</a>
+    <p>Select your preferences</p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            {% set formHtml %}
+                {{ form_start(form, {action:path('order_summary')}) }}
+                {{ form_label(form.addresses, 'Select your delivery address') }}
+                <a href="{{ path('account_address_add') }}" >Add an address</a>
+                {{ form_end(form) }}
+            {% endset %}
+
+            {{ formHtml|replace({'[br]':'<br/>'})|raw }}
+        </div>
+        <div class="col-md-6">
+            <div class="text-center">
+                <b>Order summary</b>
+            </div>
+
+            <div class="order-summary">
+                {% for key,item in cart %}
+                    <div class="row {% if key > 0 %}mt-2{% endif %}">
+                        <div class="col-2"><img src="/uploads/{{ item.product.picture }}" alt="{{ item.product.name }}" height="75px"></div>
+                        <div class="col-5 my-auto text-center">{{ item.product.name }}</div>
+                        <div class="col-2 my-auto">x {{ item.quantity }}</div>
+                        <div class="col-3 my-auto">{{ (item.product.price/100)|number_format(2) }} €</div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
